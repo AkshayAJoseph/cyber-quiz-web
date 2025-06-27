@@ -1,5 +1,5 @@
 const questions = [
-       { question: "What is phishing?", options: ["A) A type of fish", "B) A scam to trick people into giving information", "C) A secure email protocol", "D) A firewall setting"], answer: "B", explanation: "Phishing is a scam to steal sensitive information via fake emails or websites." },
+    { question: "What is phishing?", options: ["A) A type of fish", "B) A scam to trick people into giving information", "C) A secure email protocol", "D) A firewall setting"], answer: "B", explanation: "Phishing is a scam to steal sensitive information via fake emails or websites." },
     { question: "What should you do if you get a suspicious email?", options: ["A) Click all links to investigate", "B) Reply with your personal details", "C) Report and delete it", "D) Forward it to friends"], answer: "C", explanation: "Suspicious emails should be reported to your IT team or email provider and deleted to avoid phishing risks." },
     { question: "Which is the strongest password?", options: ["A) password123", "B) P@ssw0rd!2023", "C) 123456", "D) myname"], answer: "B", explanation: "Strong passwords include a mix of letters, numbers, and symbols, like P@ssw0rd!2023." },
     { question: "What is malware?", options: ["A) A helpful program", "B) Harmful software like viruses", "C) An antivirus tool", "D) A type of hardware"], answer: "B", explanation: "Malware is harmful software designed to damage or steal data from your device." },
@@ -8,7 +8,7 @@ const questions = [
     { question: "What should you do if you suspect a website is fake?", options: ["A) Enter your login details to test it", "B) Check for 'https://' and a padlock icon in the browser", "C) Download any files offered to verify the site", "D) Share the link with colleagues to get their opinion"], answer: "B", explanation: "A fake website may lack 'https://' or a padlock, indicating it’s not secure." },
     { question: "What is a common sign of a phishing email?", options: ["A) It comes from a trusted company logo", "B) It asks for immediate action or threatens consequences", "C) It has perfect grammar and spelling", "D) It includes a PDF attachment"], answer: "B", explanation: "Phishing emails often use urgent language to trick users into acting quickly." },
     { question: "Why is it important to update your software regularly?", options: ["A) To get new features only", "B) To improve device speed", "C) To patch security vulnerabilities and protect against attacks", "D) To change the software’s appearance"], answer: "C", explanation: "Software updates patch vulnerabilities to protect against cyber threats." },
-    { question: "What is a key benefit of using a password manager?", options: ["A) It allows you to reuse the same password across sites", "B) It stores and generates strong, unique passwords securely", "C) It automatically shares passwords with trusted contacts", "D) It reduces the need for antivirus software"], answer: "B", explanation: "Password managers create and store unique, strong passwords to enhance security." },
+    { question: "What is a key benefit of using a password manager?", options: ["A) It allows you to reuse the same password across sites", "B) It stores and generates strong, unique passwords securely", "C) It automatically shares passwords with trusted contacts", "D) It reduces the need for antivirus software"], answer: "B", explanation: "Password managers create and store unique, strong passwords to enhance security." }
 ];
 
 let currentQuestion = 0;
@@ -44,9 +44,9 @@ document.getElementById("quiz-form").addEventListener("submit", function (e) {
     const answer = selected.value;
     if (answer === questions[currentQuestion].answer) {
         score++;
-        alert("Correct!");
+        alert("Correct! " + questions[currentQuestion].explanation);
     } else {
-        alert(`Incorrect! The correct answer is ${questions[currentQuestion].answer}.`);
+        alert(`Incorrect! The correct answer is ${questions[currentQuestion].answer}. ${questions[currentQuestion].explanation}`);
     }
     currentQuestion++;
     showQuestion();
