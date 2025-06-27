@@ -13,6 +13,7 @@
         <label for="player-name">Enter your name or alias:</label><br>
         <input type="text" id="player-name" placeholder="e.g., CyberHero" maxlength="20"><br>
         <button onclick="startQuiz()">Start Quiz</button>
+        <button onclick="clearScoreboard()">Clear Scoreboard</button>
         <h3>Recent Scores</h3>
         <div id="start-scoreboard"></div>
     </div>
@@ -23,8 +24,10 @@
             <label><input type="radio" name="answer" value="B"> <span id="optionB"></span></label><br>
             <label><input type="radio" name="answer" value="C"> <span id="optionC"></span></label><br>
             <label><input type="radio" name="answer" value="D"> <span id="optionD"></span></label><br>
-            <button type="submit">Submit</button>
+            <button type="submit" id="submit-button">Submit</button>
         </form>
+        <div id="explanation" style="display: none; color: #1a3c6d; margin-top: 10px;"></div>
+        <button id="next-button" style="display: none;" onclick="nextQuestion()">Next</button>
     </div>
     <div id="end-screen" style="display: none;">
         <h2>Quiz Over!</h2>
@@ -32,6 +35,7 @@
         <h3>Recent Scores</h3>
         <div id="end-scoreboard"></div>
         <button onclick="restartQuiz()">Play Again</button>
+        <button onclick="clearScoreboard()">Clear Scoreboard</button>
     </div>
     <script src="script.js"></script>
 </body>
