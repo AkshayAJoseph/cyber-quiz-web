@@ -71,3 +71,9 @@ input#player-name {
 #next-button:hover {
     background-color: #218838;
 }
+#end-screen button:nth-child(3) {
+    background-color: #17a2b8;
+}
+#end-screen button:nth-child(3):hover {
+    background-color: #138496;
+}

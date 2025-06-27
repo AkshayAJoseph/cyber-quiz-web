@@ -47,6 +47,7 @@ function showQuestion() {
 function updateScoreboard(addNewScore = false) {
     let scoreboard = JSON.parse(localStorage.getItem("scoreboard") || "[]");
     
+
     if (addNewScore && playerName && score >= 0) {
         scoreboard.push({
             id: Date.now(), 
@@ -54,7 +55,7 @@ function updateScoreboard(addNewScore = false) {
             score: score,
             timestamp: new Date().toISOString()
         });
-      
+        
         scoreboard.sort((a, b) => b.score - a.score || new Date(b.timestamp) - new Date(a.timestamp));
        
         scoreboard = scoreboard.slice(0, 5);
@@ -82,6 +83,17 @@ function updateScoreboard(addNewScore = false) {
 function clearScoreboard() {
     localStorage.removeItem("scoreboard");
     updateScoreboard();
+}
+
+function shareScore() {
+    const scoreText = `${playerName} scored ${score}/${questions.length} on the Cybersecurity Awareness Quiz!`;
+    navigator.clipboard.writeText(scoreText).then(() => {
+        document.getElementById("explanation").textContent = "Score copied to clipboard!";
+        document.getElementById("explanation").style.display = "block";
+    }).catch(() => {
+        document.getElementById("explanation").textContent = "Failed to copy score. Please try again.";
+        document.getElementById("explanation").style.display = "block";
+    });
 }
 
 function nextQuestion() {
