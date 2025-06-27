@@ -13,8 +13,14 @@ const questions = [
 
 let currentQuestion = 0;
 let score = 0;
+let playerName = "";
 
 function startQuiz() {
+    playerName = document.getElementById("player-name").value.trim();
+    if (!playerName) {
+        alert("Please enter a name or alias!");
+        return;
+    }
     document.getElementById("start-screen").style.display = "none";
     document.getElementById("quiz-screen").style.display = "block";
     showQuestion();
@@ -23,7 +29,7 @@ function startQuiz() {
 function showQuestion() {
     if (currentQuestion < questions.length) {
         const q = questions[currentQuestion];
-        document.getElementById("question").textContent = `Q${currentQuestion + 1}: ${q.question}`;
+        document.getElementById("question").textContent = `Question ${currentQuestion + 1}/${questions.length}: ${q.question}`;
         document.getElementById("optionA").textContent = q.options[0];
         document.getElementById("optionB").textContent = q.options[1];
         document.getElementById("optionC").textContent = q.options[2];
@@ -32,6 +38,29 @@ function showQuestion() {
     } else {
         endQuiz();
     }
+}
+
+function updateScoreboard() {
+    let scoreboard = JSON.parse(localStorage.getItem("scoreboard") || "[]");
+    scoreboard.push({
+        name: playerName,
+        score: score,
+        timestamp: new Date().toISOString()
+    });
+    scoreboard.sort((a, b) => b.score - a.score || new Date(b.timestamp) - new Date(a.timestamp));
+    scoreboard = scoreboard.slice(0, 5);
+    localStorage.setItem("scoreboard", JSON.stringify(scoreboard));
+
+    const startScoreboard = document.getElementById("start-scoreboard");
+    const endScoreboard = document.getElementById("end-scoreboard");
+    startScoreboard.innerHTML = "";
+    endScoreboard.innerHTML = "";
+    scoreboard.forEach((entry, index) => {
+        const date = new Date(entry.timestamp).toLocaleString();
+        const entryText = `${index + 1}. ${entry.name}: ${entry.score}/${questions.length} (Played: ${date})`;
+        startScoreboard.innerHTML += `<p>${entryText}</p>`;
+        endScoreboard.innerHTML += `<p>${entryText}</p>`;
+    });
 }
 
 document.getElementById("quiz-form").addEventListener("submit", function (e) {
@@ -56,12 +85,16 @@ function endQuiz() {
     document.getElementById("quiz-screen").style.display = "none";
     document.getElementById("end-screen").style.display = "block";
     document.getElementById("score").textContent = `Your score: ${score}/${questions.length}`;
+    updateScoreboard();
 }
 
 function restartQuiz() {
     currentQuestion = 0;
     score = 0;
+    playerName = "";
     document.getElementById("end-screen").style.display = "none";
-    document.getElementById("quiz-screen").style.display = "block";
-    showQuestion();
+    document.getElementById("start-screen").style.display = "block";
+    document.getElementById("player-name").value = "";
 }
+
+updateScoreboard();
