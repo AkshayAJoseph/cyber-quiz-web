@@ -9,7 +9,7 @@ body {
 }
 div {
     background-color: white;
-    padding: 20 ônibus;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -34,4 +34,19 @@ label {
     display: block;
     margin: 10px 0;
     text-align: left;
+}
+input#player-name {
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+#start-scoreboard, #end-scoreboard {
+    margin-top: 20px;
+    text-align: left;
+    font-size: 14px;
+}
+#start-scoreboard p, #end-scoreboard p {
+    margin: 5px 0;
 }
